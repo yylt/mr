@@ -15,7 +15,10 @@
 *.out
 
 # Dependency directories (remove the comment below to include it)
-# vendor/
+vendor/
+
+# Rust
+target/
 
 # Go workspace file
 go.work
