@@ -3,9 +3,12 @@ name: Release
 on:
   push:
     tags:
-      - "v*"
+      - "*"
 
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 env:
   CARGO_TERM_COLOR: always
@@ -81,7 +84,8 @@ jobs:
         with:
           files: target/${{ matrix.target }}/release/${{ env.BINARY }}-${{ matrix.target }}.zip
           generate_release_notes: true
-          draft: true
+          draft: false
+          prerelease: ${{ contains(github.ref, 'beta') || contains(github.ref, 'rc') }}
 
   publish-crate:
     name: Publish to crates.io
